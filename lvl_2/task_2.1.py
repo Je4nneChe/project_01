@@ -18,17 +18,33 @@ def maximum(arr):
 
 
 # Решение
-# Исходный список чисел
-numbers = [22, 44, 77, 33, 55, 8, 99]
+# Вариант 1
+arr =  [22, 44, 77, 33, 55, 8, 99]
+def maximum(arr):
+    max_num = arr[0]
+    for num in arr:
+        if num > max_num:
+            max_num = num
+    return max_num
+def minimum(arr):
+    min_num = arr[0]
+    for num in arr:
+        if num < min_num:
+            min_num = num
+    return min_num
+print("max =", maximum(arr), ", min =", minimum(arr))
 
+
+# Вариант 2
 # Инициализация переменных max_number и min_number
-max_number, min_number = numbers[0], numbers[0]
-
 # Цикл for для прохода по всем элементам списка
+
+numbers = [22, 44, 77, 33, 55, 8, 99]
+max_number, min_number = numbers[0], numbers[0]
 for number in numbers:
+    if number > max_number:
+        max_number = number 
     if number < min_number:
         min_number = number
-    if number > max_number:
-        max_number = number  
-
-print('min =', min_number, ',', 'max =', max_number)
+     
+print('max =', max_number, ',', 'min =', min_number)
