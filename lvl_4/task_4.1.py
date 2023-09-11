@@ -68,57 +68,57 @@ connection.close()
 
 # 1 вариант решения:
 
-def get_connection():                            # функция подключения к БД
-    connection = sqlite3.connect('teatchers.db') # переменная для подключения к БД
+def get_connection():                                                 # функция подключения к БД
+    connection = sqlite3.connect('teatchers.db')                      # переменная для подключения к БД
     return connection
-def close_connection(connection): # функция отключения от БД
+def close_connection(connection):                                     # функция отключения от БД
     if connection:
-        connection.close()        # закрываем соединение с БД
+        connection.close()                                            # закрываем соединение с БД
 
-def get_school_name(school_id):      # функция для вывода имени школы
+def get_school_name(school_id):                                       # функция для вывода имени школы
     try:
-        connection = get_connection() # исполняю функцию get_connection()
-        cursor = connection.cursor() # определяю курсор
+        connection = get_connection()                                 # исполняю функцию get_connection()
+        cursor = connection.cursor()                                  # определяю курсор
         select_query = """SELECT * FROM School WHERE School_Id = ?""" # задаю переменную с SQL запросом
-        # (значение из таб School - School_Id (Primary key))
-        cursor.execute(select_query, (school_id,)) # курсором выполняю запрос для извлечения рез-та
-        record = cursor.fetchone() # присваиваю переменной record вывод результата 
-        close_connection(connection) # закрываю соединение с БД
-        return record[1] # возвращаем результат, где 1 - это индекс в списке значений по студенту
-    except(Exception, sqlite3.Error) as error: # если будет исключение, код не сработает
-        print("Ошибка в получении данных по школе ", error) # и выведет ошибку
+                                                                      # (значение из таб School - School_Id (Primary key))
+        cursor.execute(select_query, (school_id,))                    # курсором выполняю запрос для извлечения рез-та
+        record = cursor.fetchone()                                    # присваиваю переменной record вывод результата 
+        close_connection(connection)                                  # закрываю соединение с БД
+        return record[1]                                              # возвращаем результат, где 1 - это индекс в списке значений по студенту
+    except(Exception, sqlite3.Error) as error:                        # если будет исключение, код не сработает
+        print("Ошибка в получении данных по школе ", error)           # и выведет ошибку
     
-def get_student(student_id):         # получим данные по студенту по его ID
+def get_student(student_id):                                          # получим данные по студенту по его ID
     try:
         connection = get_connection()
         cursor = connection.cursor()
         select_query = """SELECT * FROM Students WHERE Student_Id = ?""" # задаю переменную с SQL запросом
-        # (значение из таб Students - Student_Id)
-        cursor.execute(select_query, (student_id,)) # курсором выполняю запрос для извлечения рез-та 
-        records = cursor.fetchall() # присваиваю переменной record вывод всех результатов 
-        for row in records:                 # для строки в выводе
-            print ("ID студента", row[0])   # печатаю ...., где  0 индекс в списке значений по студенту
-            print ("Имя студента", row[1])  # печатаю ...., где  1 индекс в списке значений по студенту
-            print ("ID школы", row[2])      # печатаю ...., где  2 индекс в списке значений по студенту
-            print ("Название школы", get_school_name(row[2]))  # печатаю ...., где  2 индекс в списке значений по школе
-        close_connection(connection)                           # закрываю соединение с БД
-    except (Exception, sqlite3.Error) as error:                # если будет исключение, код не сработает
-        print ("Ошибка в получении данных ", error)            # и выведет ошибку
-get_student(202)                                               # получаем студента по ID (ID в скобках) 
+                                                                      # (значение из таб Students - Student_Id)
+        cursor.execute(select_query, (student_id,))                   # курсором выполняю запрос для извлечения рез-та 
+        records = cursor.fetchall()                                   # присваиваю переменной record вывод всех результатов 
+        for row in records:                                           # для строки в выводе
+            print ("ID студента", row[0])                             # печатаю ...., где  0 индекс в списке значений по студенту
+            print ("Имя студента", row[1])                            # печатаю ...., где  1 индекс в списке значений по студенту
+            print ("ID школы", row[2])                                # печатаю ...., где  2 индекс в списке значений по студенту
+            print ("Название школы", get_school_name(row[2]))         # печатаю ...., где  2 индекс в списке значений по школе
+        close_connection(connection)                                  # закрываю соединение с БД
+    except (Exception, sqlite3.Error) as error:                       # если будет исключение, код не сработает
+        print ("Ошибка в получении данных ", error)                   # и выведет ошибку
+get_student(202)                                                      # получаем студента по ID (ID в скобках) 
 
-# если не создавать таблицу School, то название школы будет неизвестно
+# если не показать создание таблицы School, то название школы будет неизвестно
 # и при поиске ошибок выведится - Ошибка в получении данных  name 'get_school_name' is not defined.
-# если введеннго ID студента нет в таб.студетов, то код не сработает
+# если введенного ID студента нет в таб.студентов, то код не сработает
 # если ошибка внутри def get_student(student_id):, то выведится - Ошибка ........
 
 # 2 вариант решения через оператор JOIN (короче):
 
-def get_connection():                            # функция подключения к БД
-    connection = sqlite3.connect('teatchers.db') # переменная для подключения к БД
+def get_connection():                                                  # функция подключения к БД
+    connection = sqlite3.connect('teatchers.db')                       # переменная для подключения к БД
     return connection
-def close_connection(connection): # функция отключения от БД
+def close_connection(connection):                                      # функция отключения от БД
     if connection:
-        connection.close()        # закрываем соединение с БД
+        connection.close()                                             # закрываем соединение с БД
 
 def get_student(student_id):
     try:
