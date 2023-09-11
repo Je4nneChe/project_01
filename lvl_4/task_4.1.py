@@ -120,7 +120,7 @@ def close_connection(connection): # функция отключения от Б�
     if connection:
         connection.close()        # закрываем соединение с БД
 
-def get_student_school(student_id):
+def get_student(student_id):
     try:
         connection = get_connection()
         cursor = connection.cursor()
@@ -134,7 +134,7 @@ def get_student_school(student_id):
             print("Название школы:", row[4],'\n')
     except (Exception, sqlite3.Error) as error:
         print ('Ошибка в получении данных', error)
-get_student_school(203)
+get_student(203)
 
 # запрос """SELECT * FROM Students JOIN School ON School.School_Id = Students.School_Id WHERE Students.Student_Id=?"""
 # означает: выбираем всю таб. Students, присоединяем таб. School по условию - поле School_Id в таб.School 
