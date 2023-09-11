@@ -66,10 +66,11 @@ cursor.execute(query)
 connection.commit()
 connection.close()
 
+# 1 вариант решения:
+
 def get_connection():                            # функция подключения к БД
     connection = sqlite3.connect('teatchers.db') # переменная для подключения к БД
     return connection
-    
 def close_connection(connection): # функция отключения от БД
     if connection:
         connection.close()        # закрываем соединение с БД
@@ -109,3 +110,32 @@ get_student(202)                                               # получае�
 # и при поиске ошибок выведится - Ошибка в получении данных  name 'get_school_name' is not defined.
 # если введеннго ID студента нет в таб.студетов, то код не сработает
 # если ошибка внутри def get_student(student_id):, то выведится - Ошибка ........
+
+# 2 вариант решения через оператор JOIN (короче):
+
+def get_connection():                            # функция подключения к БД
+    connection = sqlite3.connect('teatchers.db') # переменная для подключения к БД
+    return connection
+def close_connection(connection): # функция отключения от БД
+    if connection:
+        connection.close()        # закрываем соединение с БД
+
+def get_student_school(student_id):
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        query = """SELECT * FROM Students JOIN School ON School.School_Id = Students.School_Id WHERE Students.Student_Id=?"""
+        cursor.execute (query,(student_id,))
+        records = cursor.fetchall()
+        for row in records:
+            print("ID студента:", row[0])
+            print("Имя студента:", row[1])
+            print("ID школы:", row[2])   
+            print("Название школы:", row[4],'\n')
+    except (Exception, sqlite3.Error) as error:
+        print ('Ошибка в получении данных', error)
+get_student_school(203)
+
+# запрос """SELECT * FROM Students JOIN School ON School.School_Id = Students.School_Id WHERE Students.Student_Id=?"""
+# означает: выбираем всю таб. Students, присоединяем таб. School по условию - поле School_Id в таб.School 
+# должно соответсвовать полю School_Id в таб.Students, где ID студента и запрашиваем.
