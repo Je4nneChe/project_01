@@ -10,11 +10,11 @@
 # * [5]                             -> min = 5, max = 5
 # функции sorted, max и min использовать нельзя!
 
-# def minimum(arr):
-#     pass
+def minimum(arr):
+    pass
 
-# def maximum(arr):
-#     pass
+def maximum(arr):
+    pass
 
 # Решение с помощью сортировки пузырьком через for:
 
@@ -29,34 +29,44 @@ def bubble_for(lst):
 for lst in arr:
   print ('*', lst,'-> min =',bubble_for(lst)[0],', max =',bubble_for(lst)[-1] )
 
-# # Решение для одного списка:
-# # Вариант 1
-# arr =  [22, 44, 77, 33, 55, 8, 99]
-# def maximum(arr):
-#     max_num = arr[0]
-#     for num in arr:
-#         if num > max_num:
-#             max_num = num
-#     return max_num
-# def minimum(arr):
-#     min_num = arr[0]
-#     for num in arr:
-#         if num < min_num:
-#             min_num = num
-#     return min_num
-# print("max =", maximum(arr), ", min =", minimum(arr))
 
 
-# # Вариант 2
-# # Инициализация переменных max_number и min_number
-# # Цикл for для прохода по всем элементам списка
 
-# numbers = [22, 44, 77, 33, 55, 8, 99]
-# max_number, min_number = numbers[0], numbers[0]
-# for number in numbers:
-#     if number > max_number:
-#         max_number = number 
-#     if number < min_number:
-#         min_number = number
+
+
+
+
+
+
+
+# Пример решения для одного списка:
+# Вариант 1
+arr =  [22, 44, 77, 33, 55, 8, 99]
+def maximum(arr):
+    max_num = arr[0]
+    for num in arr:
+        if num > max_num:
+            max_num = num
+    return max_num
+def minimum(arr):
+    min_num = arr[0]
+    for num in arr:
+        if num < min_num:
+            min_num = num
+    return min_num
+print("max =", maximum(arr), ", min =", minimum(arr))
+
+
+# Вариант 2
+# Инициализация переменных max_number и min_number
+# Цикл for для прохода по всем элементам списка
+
+numbers = [22, 44, 77, 33, 55, 8, 99]
+max_number, min_number = numbers[0], numbers[0]
+for number in numbers:
+    if number > max_number:
+        max_number = number 
+    if number < min_number:
+        min_number = number
      
-# print('max =', max_number, ',', 'min =', min_number)
+print('max =', max_number, ',', 'min =', min_number)
