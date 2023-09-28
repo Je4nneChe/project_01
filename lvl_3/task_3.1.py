@@ -32,17 +32,20 @@ if __name__ == '__main__':
 
     matrix = Matrix(rows=10, colomns=10, value=1)
     print(matrix)
+    print('*'* 20)
 
     measure = matrix.get_measure()
     print(f'Размер матрицы:\nкол-во строк - {measure[0]}\nкол-во колонок - {measure[1]}\n')
+    print('*'* 20)
 
     matrix.change_element(row=1, colomn=3, value=5)
     print(matrix)
-
+    print('*'* 20)
    
     matrix.change_all_values(6)
     print(matrix)
-
+    print('*'* 20)
+    
     matrix.rundomize_values()
     print(matrix) 
     
